@@ -1,7 +1,8 @@
 #include "ListasAlumno.h"
 
-using namespace std;
+#include <string>
 
+using namespace std;
 
 ListasAlumno::ListasAlumno() {
     primero = NULL;
@@ -40,8 +41,11 @@ void ListasAlumno::eliminarAlumno(Alumno* _alumno) {
 }
 void ListasAlumno::imprimirLista() {
     NodoAlumno* aux = primero;
+
     while (aux != NULL) {
-        cout << aux->getAlumno()->getNombre() << endl;
+        string nombre = "Nombre: " + aux->getAlumno()->getNombre() + " Apelldio:" + aux->getAlumno()->getApellido() + " Edad:" + to_string(aux->getAlumno()->getEdad()) +
+                        " Semestre:" + to_string(aux->getAlumno()->getSemestre());
+        cout << nombre << endl;
         aux = aux->getSiguiente();
     }
 }

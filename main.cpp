@@ -1,68 +1,43 @@
-#include "Clases\Alumno.h"
-#include "Clases\ListasAlumno.h"
 #include <iostream>
 #include <string>
 
+#include "Clases\Alumno.h"
+#include "Clases\ListasAlumno.h"
 
 using namespace std;
 
+void ingresar_profesor(ListaPorfesor);
 void desplegarMenuPrinicipal();
 bool check_number(string);
+void ingresar_estudiante(ListasAlumno);
 
-string opcion,nombre,apellido,ramo1,ramo2,ramo3,sala,carrera;
-int edad,semestre,ram;
-int main(int argc, char const *argsv[]) {
-    Alumno* al = new Alumno("","",0,0);
+string opcion, nombre, apellido, ramo1, ramo2, ramo3, sala, carrera;
+int edad, semestre, ram;
+int main(int argc, char const* argsv[]) {
     ListasAlumno* nuevalistaAlumno = new ListasAlumno();
     desplegarMenuPrinicipal();
+    string ramito;
     cout << "Ingrese una opcion-> ";
     cin >> opcion;
-    if (check_number(opcion)) {
-        int opcion_num = stoi(opcion);
-        while (stoi(opcion) < 1 || stoi(opcion) > 7) {
-            cout << "Ingrese una opcion valida-> ";
-            cin >> opcion;
-        }
-        switch (opcion_num) {
+    while (stoi(opcion) != 7) {
+        switch (stoi(opcion)) {
             case 1:
-                cout << "Ingrese el nombre del estudiante-> ";
-                cin >> nombre;
-                cout << "Ingrese el apellido del estudiante-> ";
-                cin >> apellido;
-                cout << "Ingrese la edad del estudiante-> ";
-                cin >> edad;
-                cout << "Ingrese el semestre del estudiante-> ";
-                cin >> semestre;
-                nuevalistaAlumno->agregarAlumno(new Alumno(nombre, apellido, edad, semestre));
+                ingresar_estudiante(nuevalistaAlumno);
                 break;
             case 2:
-                cout << "Ingrese el nombre del profesor-> ";
-                cin >> nombre;
-                cout << "Ingrese el apellido del profesor-> ";
-                cin >> apellido;
-                cout << "Ingrese la cantidad de ramos que el profesor va a realizar (Maximo 3): ";
-                cin>> ram;
-                while (ram < 0 || ram > 3) {
-                    cout << "Ingrese una opcion valida-> ";
-                    cin >> ram;
-                }
-                for(int i = 0; i< ram ; i++){
-                    //cout << "Ingrese el ramo "<<;
-                    //xd
-                }
-                if(ram >= 1){
-                    cout<<"Ingrese el ramo 1: ";
-                    cin >> ramo1;
-                }else if(ram >=2){
-                    cout<<"Ingrese el ramo 2: ";
-                    cin >> ramo2;
-                }else if(ram == 3){
-                    cout<<"Ingrese el ramo 3: ";
-                    cin >> ramo3;
-                }
+                ingresar_profesor(nuevalistaProfesor);
+                break;
             default:
+                cout << "Opcion ingresada no valida." << endl;
                 break;
         }
+        desplegarMenuPrinicipal();
+        cout << "Ingrese una opcion-> ";
+        cin >> opcion;
+    }
+
+    if(stoi(opcion) == 7){
+        cout << "Saliendo del programa..." << endl;
     }
 
     return 0;
@@ -87,4 +62,43 @@ bool check_number(string str) {
         if (isdigit(str[i]) == false)
             return false;
     return true;
+}
+
+void ingresar_estudiante(ListasAlumno* lista){
+    cout << "Ingrese el nombre del estudiante-> ";
+    cin >> nombre;
+    cout << "Ingrese el apellido del estudiante-> ";
+    cin >> apellido;
+    cout << "Ingrese la edad del estudiante-> ";
+    cin >> edad;
+    cout << "Ingrese el semestre del estudiante-> ";
+    cin >> semestre;
+    lista->agregarAlumno(new Alumno(nombre, apellido, edad, semestre));
+}
+void ingresar_profesor(ListaProfesor* lista){
+    cout << "Ingrese el nombre del profesor-> ";
+    cin >> nombre;
+    cout << "Ingrese el apellido del profesor-> ";
+    cin >> apellido;
+    cout << "Ingrese la cantidad de ramos que el profesor va a realizar (Maximo 3): ";
+    cin >> ram;
+    while (ram < 0 || ram > 3) {
+        cout << "Ingrese una opcion valida-> ";
+        cin >> ram;
+    }
+    for (int i = 0; i < ram; i++) {
+        cout << "Ingrese el ramo " << to_string(ram) << "-> ";
+        cin >> ramito;
+        switch(i){
+            case 0:
+                ramo1 = ramito;
+                break;
+            case 1:
+                ramo2 = ramito;
+                break;
+            case 2:
+                ramo3 = ramito;
+                break;
+        }
+    }
 }
