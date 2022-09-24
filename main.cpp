@@ -3,20 +3,21 @@
 
 #include "Clases\Alumno.h"
 #include "Clases\ListasAlumno.h"
+#include "Clases\ListasProfesor.h"
 
 using namespace std;
 
-void ingresar_profesor(ListaPorfesor);
 void desplegarMenuPrinicipal();
 bool check_number(string);
-void ingresar_estudiante(ListasAlumno);
+void ingresar_estudiante(ListasAlumno*);
+void ingresar_profesor(ListasProfesor*);
 
 string opcion, nombre, apellido, ramo1, ramo2, ramo3, sala, carrera;
 int edad, semestre, ram;
 int main(int argc, char const* argsv[]) {
     ListasAlumno* nuevalistaAlumno = new ListasAlumno();
+    ListasProfesor* nuevalistaProfesor = new ListasProfesor();
     desplegarMenuPrinicipal();
-    string ramito;
     cout << "Ingrese una opcion-> ";
     cin >> opcion;
     while (stoi(opcion) != 7) {
@@ -74,8 +75,10 @@ void ingresar_estudiante(ListasAlumno* lista){
     cout << "Ingrese el semestre del estudiante-> ";
     cin >> semestre;
     lista->agregarAlumno(new Alumno(nombre, apellido, edad, semestre));
+    
 }
-void ingresar_profesor(ListaProfesor* lista){
+void ingresar_profesor(ListasProfesor* lista){
+    string ramito;
     cout << "Ingrese el nombre del profesor-> ";
     cin >> nombre;
     cout << "Ingrese el apellido del profesor-> ";
@@ -101,4 +104,5 @@ void ingresar_profesor(ListaProfesor* lista){
                 break;
         }
     }
+    lista->agregarProfesor(new Profesor(nombre, apellido));
 }

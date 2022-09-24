@@ -49,3 +49,14 @@ void ListasProfesor::imprimirLista(){
 int ListasProfesor::getLargo(){
     return largo;
 }
+
+void ListasProfesor::buscarProfesor(string _nombre){
+    NodoProfesor* aux = primero;
+    while(aux != NULL){
+        if(aux ->getProfesor()->getNombre() == _nombre){
+            cout<< aux->getProfesor()->getNombre() <<endl;
+            break;
+        }
+        aux = aux->getSiguente();
+    }
+}
