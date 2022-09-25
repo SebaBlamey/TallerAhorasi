@@ -11,10 +11,10 @@ using namespace std;
 int menu_secundario();
 void desplegar_menu_prinicipal();
 bool check_number(string);
-void ingresar_estudiante(ListasAlumno*);
-void consultar_estudiante(ListasAlumno*);
-void ingresar_profesor(ListasProfesor*);
-void consultar_profesor(ListasProfesor*);
+void ingresar_estudiante(ListasAlumno*,ListaRamos*);
+void consultar_estudiante(ListasAlumno*,ListaRamos*);
+void ingresar_profesor(ListasProfesor*,ListaRamos*);
+void consultar_profesor(ListasProfesor*,ListaRamos*);
 void ingresar_ramo(ListaRamos*);
 void consultar_ramo(ListaRamos*);
 
@@ -30,18 +30,18 @@ int main(int argc, char const* argsv[]) {
     while (stoi(opcion) != 7) {
         switch (stoi(opcion)) {
             case 1:
-                ingresar_estudiante(nuevalistaAlumno);
+                ingresar_estudiante(nuevalistaAlumno,nuevalistaRamo);
                 break;
             case 2:
-                ingresar_profesor(nuevalistaProfesor);
+                ingresar_profesor(nuevalistaProfesor,nuevalistaRamo);
                 break;
             case 3:
                 ingresar_ramo(nuevalistaRamo);
                 break;
             case 4:
-                consultar_estudiante(nuevalistaAlumno);
+                consultar_estudiante(nuevalistaAlumno,nuevalistaRamo);
             case 5:
-                consultar_profesor(nuevalistaProfesor);
+                consultar_profesor(nuevalistaProfesor,nuevalistaRamo);
             default:
                 cout << "Opcion ingresada no valida." << endl;
                 break;
@@ -95,7 +95,7 @@ bool check_number(string str) {
     return true;
 }
 
-void ingresar_estudiante(ListasAlumno* lista) {
+void ingresar_estudiante(ListasAlumno* lista, ListaRamos* listaRamo) {
     string ramito;
     cout << "Ingrese el nombre del estudiante-> ";
     cin >> nombre;
@@ -111,20 +111,47 @@ void ingresar_estudiante(ListasAlumno* lista) {
     cout << "Ingrese el semestre del estudiante-> ";
     cin >> semestre;
     ListaRamos* listilla = new ListaRamos();
-    cout << "Ingrese la cantidad de ramos que el profesor va a realizar (Maximo 5): ";
-    cin >> ram;
-    while (ram <= 0 || ram > 5) {
+    if(listaRamo->getLargo() != 0){
+        cout << "Ingrese la cantidad de ramos que el Alumno va a tomar (Maximo 5): ";
+        cin >> ram;
+        while (ram <= 0 || ram > 5) {
         cout << "Ingrese una opcion valida-> ";
         cin >> ram;
+        }
+        for (int i = 0; i < ram; i++) {
+            cout << "Ingrese el nombre del ramo " << to_string(i+1) << "-> ";
+            cin >> ramito;
+            Ramo* r = listaRamo->buscarRamo(ramito);
+            if(r != NULL){
+                if(listilla->buscarRamo(r->getNombre()) == NULL){
+                listilla->agregarRamo(r); 
+                cout << "Ramo Agregado"<<endl;   
+                }else{
+                    cout << "El ramo ya fue ingresado"<<endl;
+                }
+            }else{
+                cout << "El ramo no existe"<<endl;
+            }
+            
+        };
+    }else{
+        cout << "Aun no se han ingresado ramos, desea agregar ramos antes continuar?"<<endl;
+        cout << "(1) - si"<<endl;
+        cout << "(2) - no"<<endl;
+        int aux;
+        cin >> aux;
+         while ((aux > 2) || (aux < 1)) {
+        cout << "Ingrese una opcion correcta: "<<endl;
+        cin >> aux;
     }
-    for (int i = 0; i < ram; i++) {
-        cout << "Ingrese el ramo " << to_string(ram) << "-> ";
-        cin >> ramito;
-        listilla->agregarRamo(new Ramo(ramito, "ICCI", "28"));
-    }
+        if(aux == 1){
+            ingresar_ramo(listaRamo);
+        }
+    };
+
     lista->agregarAlumno(new Alumno(nombre, apellido, edad, semestre, listilla));
 }
-void ingresar_profesor(ListasProfesor* lista) {
+void ingresar_profesor(ListasProfesor* lista,ListaRamos* listaRamo) {
     string ramito;
     cout << "Ingrese el nombre del profesor-> ";
     cin >> nombre;
@@ -136,20 +163,47 @@ void ingresar_profesor(ListasProfesor* lista) {
     cout << "Ingrese el apellido del profesor-> ";
     cin >> apellido;
     ListaRamos* listilla = new ListaRamos();
-    cout << "Ingrese la cantidad de ramos que el profesor va a realizar (Maximo 3): ";
-    cin >> ram;
-    while (ram <= 0 || ram > 5) {
+ if(listaRamo->getLargo() != 0){
+        cout << "Ingrese la cantidad de ramos que el profesor va a realizar (Maximo 3): ";
+        cin >> ram;
+        while (ram <= 0 || ram > 3) {
         cout << "Ingrese una opcion valida-> ";
         cin >> ram;
+        }
+        for (int i = 0; i < ram; i++) {
+            cout << "Ingrese el nombre del ramo " << to_string(i+1) << "-> ";
+            cin >> ramito;
+            Ramo* r = listaRamo->buscarRamo(ramito);
+            if(r != NULL){
+                if(listilla->buscarRamo(r->getNombre()) == NULL){
+                listilla->agregarRamo(r); 
+                cout << "Ramo Agregado"<<endl;   
+                }else{
+                    cout << "El ramo ya fue ingresado"<<endl;
+                }
+            }else{
+                cout << "El ramo no existe"<<endl;
+            }
+            
+        };
+    }else{
+        cout << "Aun no se han ingresado ramos, desea agregar ramos antes continuar?"<<endl;
+        cout << "(1) - si"<<endl;
+        cout << "(2) - no"<<endl;
+        int aux;
+        cin >> aux;
+         while ((aux > 2) || (aux < 1)) {
+        cout << "Ingrese una opcion correcta: "<<endl;
+        cin >> aux;
     }
-    for (int i = 0; i < ram; i++) {
-        cout << "Ingrese el ramo " << to_string(i + 1) << "-> ";
-        cin >> ramito;
-        listilla->agregarRamo(new Ramo(ramito, "ICCI", "28"));
-    }
+        if(aux == 1){
+            ingresar_ramo(listaRamo);
+        }
+    };
+
     lista->agregarProfesor(new Profesor(nombre, apellido, listilla));
 }
-void consultar_estudiante(ListasAlumno* lista) {
+void consultar_estudiante(ListasAlumno* lista,ListaRamos* listaRamo) {
     cout << "Ingrese el nombre del estudiante-> ";
     cin >> nombre;
     Alumno* alumno = lista->getAlumno(nombre);
@@ -184,17 +238,44 @@ void consultar_estudiante(ListasAlumno* lista) {
         cin >> semestre;
         alumno->setSemestre(semestre);
         ListaRamos* listilla = new ListaRamos();
+       if(listaRamo->getLargo() != 0){
         cout << "Ingrese la cantidad de ramos que el profesor va a realizar (Maximo 5): ";
         cin >> ram;
         while (ram <= 0 || ram > 5) {
-            cout << "Ingrese una opcion valida-> ";
-            cin >> ram;
+        cout << "Ingrese una opcion valida-> ";
+        cin >> ram;
         }
         for (int i = 0; i < ram; i++) {
-            cout << "Ingrese el ramo " << to_string(ram) << "-> ";
+            cout << "Ingrese el nombre del ramo " << to_string(i+1) << "-> ";
             cin >> ramito;
-            listilla->agregarRamo(new Ramo(ramito, "ICCI", "28"));
+            Ramo* r = listaRamo->buscarRamo(ramito);
+            if(r != NULL){
+                if(listilla->buscarRamo(r->getNombre()) == NULL){
+                listilla->agregarRamo(r); 
+                cout << "Ramo Agregado"<<endl;   
+                }else{
+                    cout << "El ramo ya fue ingresado"<<endl;
+                }
+            }else{
+                cout << "El ramo no existe"<<endl;
+            }
+            
+        };
+    }else{
+        cout << "Aun no se han ingresado ramos, desea agregar ramos antes continuar?"<<endl;
+        cout << "(1) - si"<<endl;
+        cout << "(2) - no"<<endl;
+        int aux;
+        cin >> aux;
+         while ((aux > 2) || (aux < 1)) {
+        cout << "Ingrese una opcion correcta: "<<endl;
+        cin >> aux;
+    }
+        if(aux == 1){
+            ingresar_ramo(listaRamo);
         }
+    };
+
         alumno->setRamos(listilla);
         cout << "Datos cambiados con exito..." << endl;
 
@@ -215,7 +296,7 @@ void consultar_estudiante(ListasAlumno* lista) {
     }
 }
 
-void consultar_profesor(ListasProfesor* lista) {
+void consultar_profesor(ListasProfesor* lista,ListaRamos* listaRamo) {
     int op = menu_secundario();
     cout << "Ingrese el nombre del profesor-> ";
     cin >> nombre;
@@ -242,17 +323,43 @@ void consultar_profesor(ListasProfesor* lista) {
         cin >> apellido;
         profesor->setApellido(apellido);
         ListaRamos* listilla = new ListaRamos();
-        cout << "Ingrese la cantidad nueva de ramos que el profesor va a realizar (Maximo 3): ";
+        if(listaRamo->getLargo() != 0){
+        cout << "Ingrese la cantidad de ramos que el profesor va a realizar (Maximo 5): ";
         cin >> ram;
         while (ram <= 0 || ram > 5) {
-            cout << "Ingrese una opcion valida-> ";
-            cin >> ram;
+        cout << "Ingrese una opcion valida-> ";
+        cin >> ram;
         }
         for (int i = 0; i < ram; i++) {
-            cout << "Ingrese el ramo " << to_string(i + 1) << "-> ";
+            cout << "Ingrese el nombre del ramo " << to_string(i+1) << "-> ";
             cin >> ramito;
-            listilla->agregarRamo(new Ramo(ramito, "ICCI", "28"));
+            Ramo* r = listaRamo->buscarRamo(ramito);
+            if(r != NULL){
+                if(listilla->buscarRamo(r->getNombre()) == NULL){
+                listilla->agregarRamo(r); 
+                cout << "Ramo Agregado"<<endl;   
+                }else{
+                    cout << "El ramo ya fue ingresado"<<endl;
+                }
+            }else{
+                cout << "El ramo no existe"<<endl;
+            }
+            
+        };
+    }else{
+        cout << "Aun no se han ingresado ramos, desea agregar ramos antes continuar?"<<endl;
+        cout << "(1) - si"<<endl;
+        cout << "(2) - no"<<endl;
+        int aux;
+        cin >> aux;
+         while ((aux > 2) || (aux < 1)) {
+        cout << "Ingrese una opcion correcta: "<<endl;
+        cin >> aux;
+    }
+        if(aux == 1){
+            ingresar_ramo(listaRamo);
         }
+    };
         profesor->setRamos(listilla);
         cout << "Datos cambiados con exito..." << endl;
     } else {
