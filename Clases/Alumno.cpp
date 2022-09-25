@@ -1,4 +1,5 @@
 #include "Alumno.h"
+#include <string>
 
 Alumno::Alumno(string nombre, string apellido, int edad, int Semestre) : Usuario(nombre, apellido) {
     this->Edad = edad;

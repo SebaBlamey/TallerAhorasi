@@ -15,4 +15,5 @@ class ListasAlumno{
      void eliminarAlumno(Alumno*);
      void imprimirLista();
      int getLargo();
+     Alumno* getAlumno(string);
 };

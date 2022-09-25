@@ -2,32 +2,32 @@
 
 using namespace std;
 
-ListasProfesor::ListasProfesor(){
+ListasProfesor::ListasProfesor() {
     primero = NULL;
     largo = 0;
 }
 
-void ListasProfesor::agregarProfesor(Profesor* _profesor){
+void ListasProfesor::agregarProfesor(Profesor* _profesor) {
     NodoProfesor* nuevo = new NodoProfesor(_profesor);
-    if(primero == NULL){
+    if (primero == NULL) {
         primero = nuevo;
-    }else{
+    } else {
         NodoProfesor* aux = primero;
-        while(aux ->getSiguente() != NULL){
+        while (aux->getSiguente() != NULL) {
             aux = aux->getSiguente();
         }
         aux->setSiguente(nuevo);
     }
     largo++;
 }
-void ListasProfesor::eliminarProfesor(Profesor* _profesor){
+void ListasProfesor::eliminarProfesor(Profesor* _profesor) {
     NodoProfesor* aux = primero;
     NodoProfesor* anterior = NULL;
-    while(aux != NULL){
-        if(aux ->getProfesor()->getNombre() == _profesor->getNombre()){
-            if(anterior == NULL){
+    while (aux != NULL) {
+        if (aux->getProfesor()->getNombre() == _profesor->getNombre()) {
+            if (anterior == NULL) {
                 primero = aux->getSiguente();
-            }else{
+            } else {
                 anterior->setSiguente(aux->getSiguente());
             }
             delete aux;
@@ -38,25 +38,25 @@ void ListasProfesor::eliminarProfesor(Profesor* _profesor){
         aux = aux->getSiguente();
     }
 }
-void ListasProfesor::imprimirLista(){
+void ListasProfesor::imprimirLista() {
     NodoProfesor* aux = primero;
-    while(aux != NULL){
-        cout<< aux->getProfesor()->getNombre() <<endl;
+    while (aux != NULL) {
+        cout << aux->getProfesor()->getNombre() << endl;
         aux = aux->getSiguente();
     }
 }
 
-int ListasProfesor::getLargo(){
+int ListasProfesor::getLargo() {
     return largo;
 }
 
-void ListasProfesor::buscarProfesor(string _nombre){
+Profesor* ListasProfesor::getProfesor(string _nombre) {
     NodoProfesor* aux = primero;
-    while(aux != NULL){
-        if(aux ->getProfesor()->getNombre() == _nombre){
-            cout<< aux->getProfesor()->getNombre() <<endl;
-            break;
+    while (aux != NULL) {
+        if (aux->getProfesor()->getNombre() == _nombre) {
+            return aux->getProfesor();
         }
         aux = aux->getSiguente();
     }
+    return NULL;
 }

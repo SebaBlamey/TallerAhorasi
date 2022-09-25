@@ -5,7 +5,7 @@ Ramo::Ramo(string nombre, string carrera, string sala) {
     this->Nombre = nombre;
     this->Carrera = carrera;
     this->Sala = sala;
-    this->CMprofesor;
+    //this->CMprofesor;
 }
 
 string Ramo::getNombre() {

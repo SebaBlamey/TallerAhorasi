@@ -10,7 +10,7 @@ class Ramo {
     string Nombre;
     string Carrera;
     string Sala;
-    Profesor CMprofesor;
+    //Profesor CMprofesor;
 
    public:
     Ramo(string, string, string);
@@ -20,6 +20,6 @@ class Ramo {
     void setCarrera(string carrera);
     string getSala();
     void setSala(string sala);
-    Profesor getProfesor();
-    void setProfesor(Profesor _profesor);
+    //Profesor getProfesor();
+    //void setProfesor(Profesor _profesor);
 };

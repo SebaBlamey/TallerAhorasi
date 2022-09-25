@@ -52,3 +52,14 @@ void ListasAlumno::imprimirLista() {
 int ListasAlumno::getLargo() {
     return largo;
 }
+
+Alumno* ListasAlumno::getAlumno(string _nombre) {
+    NodoAlumno* aux = primero;
+    while (aux != NULL) {
+        if (aux->getAlumno()->getNombre() == _nombre) {
+            return aux->getAlumno();
+        }
+        aux = aux->getSiguiente();
+    }
+    return NULL;
+}
