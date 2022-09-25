@@ -140,7 +140,6 @@ void ingresar_profesor(ListasProfesor* lista) {
     lista->agregarProfesor(new Profesor(nombre, apellido, listilla));
 }
 void consultar_estudiante(ListasAlumno* lista) {
-    int op = menu_secundario();
     cout << "Ingrese el nombre del estudiante-> ";
     cin >> nombre;
     Alumno* alumno = lista->getAlumno(nombre);
@@ -159,6 +158,7 @@ void consultar_estudiante(ListasAlumno* lista) {
     cout << "Ramos: " << endl;
     alumno->getRamos();
     cout << "-----------------------------" << endl;
+    int op = menu_secundario();
     if (op == 1) {
         string ramito;
         cout << "Ingrese el nombre nuevo del estudiante-> ";

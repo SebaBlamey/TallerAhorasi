@@ -1,6 +1,6 @@
 #pragma once
 #include "NodoRamo.h"
-
+#include "Ramo.h"
 using namespace std;
 class NodoRamo;
 class Ramo;
