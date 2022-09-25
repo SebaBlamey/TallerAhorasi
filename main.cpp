@@ -15,6 +15,7 @@ void consultar_estudiante(ListasAlumno*);
 void ingresar_profesor(ListasProfesor*);
 void consultar_profesor(ListasProfesor*);
 void ingresar_ramo(ListaRamos*);
+void consultar_ramo(ListaRamos*);
 // void ingresar_ramos(ListasRamo*);
 
 string opcion, nombre, apellido, ramo1, ramo2, ramo3, sala, carrera;
@@ -159,3 +160,16 @@ void ingresar_ramo(ListaRamos* lista) {
     cin >> sala;
     lista->agregarRamo(new Ramo(nombre, carrera, sala));
 }
+void consultar_ramo(ListaRamos* listaRamo){
+    cout << "Consultar Ramo" << endl;
+    cout << "Ingrese el nombre del ramo que busca: ";
+    string nombreAUX;
+    cin >> nombreAUX;
+    Ramo* r = listaRamo->buscarRamo(nombreAUX);
+    while(r == NULL){
+        cout << "Ramo no encontrado, Ingrese un nombre valido" << endl;
+        cin >> nombreAUX;
+        r = listaRamo->buscarRamo(nombreAUX);
+    }
+    cout << "Ramo nombre: "+r->getNombre() << " ,Carrera: "<< r->getCarrera() << ", Sala: " << r->getSala();
+};

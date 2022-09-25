@@ -12,5 +12,6 @@ public:
     void eliminarRamo(Ramo*);
     void imprimirLista();
     int getLargo();
+    Ramo* buscarRamo(string);
     
 };

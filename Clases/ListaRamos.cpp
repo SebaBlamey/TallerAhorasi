@@ -47,3 +47,13 @@ void ListaRamos::imprimirLista(){
 int ListaRamos::getLargo(){
     return largo;
 }
+Ramo* ListaRamos::buscarRamo(string _nombre) {
+    NodoRamo* aux = primero;
+    while (aux != NULL) {
+        if (aux->getRamo()->getNombre() == _nombre) {
+            return aux->getRamo();
+        }
+        aux = aux->getSiguente();
+    }
+    return NULL;
+}
