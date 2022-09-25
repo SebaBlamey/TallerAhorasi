@@ -99,6 +99,11 @@ void ingresar_estudiante(ListasAlumno* lista) {
     string ramito;
     cout << "Ingrese el nombre del estudiante-> ";
     cin >> nombre;
+    Alumno* al = lista->getAlumno(nombre);
+    if(al != NULL) {
+        cout << "El estudiante ya existe." << endl;
+        return;
+    }
     cout << "Ingrese el apellido del estudiante-> ";
     cin >> apellido;
     cout << "Ingrese la edad del estudiante-> ";
@@ -123,6 +128,11 @@ void ingresar_profesor(ListasProfesor* lista) {
     string ramito;
     cout << "Ingrese el nombre del profesor-> ";
     cin >> nombre;
+    Profesor* pro = lista->getProfesor(nombre);
+    if(pro != NULL) {
+        cout << "El profesor ya existe." << endl;
+        return;
+    }
     cout << "Ingrese el apellido del profesor-> ";
     cin >> apellido;
     ListaRamos* listilla = new ListaRamos();
@@ -264,6 +274,11 @@ void consultar_profesor(ListasProfesor* lista) {
 void ingresar_ramo(ListaRamos* lista) {
     cout << "Ingrese el nombre del ramo-> ";
     cin >> nombre;
+    Ramo* ra = lista->buscarRamo(nombre);
+    if(ra != NULL) {
+        cout << "El Ramo ya existe." << endl;
+        return;
+    }
     cout << "Ingrese la carrera del ramo-> ";
     cin >> carrera;
     cout << "Ingrese la sala ramo-> ";
@@ -287,7 +302,7 @@ void consultar_ramo(ListaRamos* listaRamo) {
     cout << "-----------------------------" << endl;
     cout << "Nombre: " << r->getNombre() << endl;
     cout << "Carrera: " << r->getCarrera() << endl;
-    cout << "Ramos:" << r->getSala() << endl;\
+    cout << "Ramos:" << r->getSala() << endl;
     cout << "-----------------------------" << endl;
     if (op == 1) {
         cout << "Ingrese el nombre del ramo-> ";

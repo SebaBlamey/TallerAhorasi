@@ -1,5 +1,4 @@
 #include "Ramo.h"
-#include "Profesor.h"
 
 Ramo::Ramo(string nombre, string carrera, string sala) {
     this->Nombre = nombre;
