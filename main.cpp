@@ -42,6 +42,8 @@ int main(int argc, char const* argsv[]) {
                 consultar_estudiante(nuevalistaAlumno,nuevalistaRamo);
             case 5:
                 consultar_profesor(nuevalistaProfesor,nuevalistaRamo);
+            case 6:
+                consultar_ramo(nuevalistaRamo);
             default:
                 cout << "Opcion ingresada no valida." << endl;
                 break;
