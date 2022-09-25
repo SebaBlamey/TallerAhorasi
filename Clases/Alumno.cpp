@@ -17,3 +17,17 @@ void Alumno::setEdad(int edad) {
 void Alumno::setSemestre(int semestre) {
     this->Semestre = semestre;
 }
+
+bool Alumno::agregarRamo(Ramo* r){
+    if(listaRamos->getLargo() < 3){
+        listaRamos->agregarRamo(r);
+        return true;
+    }else{
+        return false;
+    }
+}
+
+void Profesor::eliminarRamo(Ramo* r){
+    listaRamos->eliminarRamo(r);
+}
+
