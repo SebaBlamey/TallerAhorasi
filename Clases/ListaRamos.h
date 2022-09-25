@@ -1,6 +1,9 @@
+#pragma once
 #include "NodoRamo.h"
 
 using namespace std;
+class NodoRamo;
+class Ramo;
 
 class ListaRamos{
 private:

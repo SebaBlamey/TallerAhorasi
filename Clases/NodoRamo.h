@@ -1,16 +1,19 @@
+#pragma once
 #include "Ramo.h"
 
 using namespace std;
+class Ramo;
+class NodoRamo;
 
-class NodoRamo{
-private:
+class NodoRamo {
+   private:
     Ramo* ramo;
     NodoRamo* siguente;
-public:
+
+   public:
     NodoRamo(Ramo*);
     Ramo* getRamo();
     void setRamo(Ramo*);
     NodoRamo* getSiguente();
     void setSiguente(NodoRamo*);
-
 };
