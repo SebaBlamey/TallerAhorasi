@@ -206,6 +206,10 @@ void ingresar_profesor(ListasProfesor* lista,ListaRamos* listaRamo) {
     lista->agregarProfesor(new Profesor(nombre, apellido, listilla));
 }
 void consultar_estudiante(ListasAlumno* lista,ListaRamos* listaRamo) {
+    if(lista->getLargo() == 0){
+        cout << "No hay estudiantes ingresados." << endl;
+        return;
+    }
     cout << "Ingrese el nombre del estudiante-> ";
     cin >> nombre;
     Alumno* alumno = lista->getAlumno(nombre);
@@ -299,6 +303,11 @@ void consultar_estudiante(ListasAlumno* lista,ListaRamos* listaRamo) {
 }
 
 void consultar_profesor(ListasProfesor* lista,ListaRamos* listaRamo) {
+    if(lista->getLargo() == 0){
+        cout << "No hay profesores ingresados"<<endl;
+        return;
+    }
+
     int op = menu_secundario();
     cout << "Ingrese el nombre del profesor-> ";
     cin >> nombre;
@@ -395,6 +404,10 @@ void ingresar_ramo(ListaRamos* lista) {
     lista->agregarRamo(new Ramo(nombre, carrera, sala));
 }
 void consultar_ramo(ListaRamos* listaRamo) {
+    if(listaRamo->getLargo() == 0){
+        cout << "No hay ramos ingresados"<<endl;
+        return;
+    }
     cout << "Consultar Ramo" << endl;
     int op = menu_secundario();
     cout << "Ingrese el nombre del ramo que busca: ";
@@ -411,10 +424,10 @@ void consultar_ramo(ListaRamos* listaRamo) {
     cout << "-----------------------------" << endl;
     cout << "Nombre: " << r->getNombre() << endl;
     cout << "Carrera: " << r->getCarrera() << endl;
-    cout << "Ramos:" << r->getSala() << endl;
+    cout << "Sala:" << r->getSala() << endl;
     cout << "-----------------------------" << endl;
     if (op == 1) {
-        cout << "Ingrese el nombre del ramo-> ";
+        cout << "Ingrese el nuevo nombre del ramo-> ";
         cin >> nombre;
         r->setNombre(nombre);
         cout << "Ingrese la carrera del ramo-> ";
